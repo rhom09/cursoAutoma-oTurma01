@@ -1,1 +1,1 @@
-# cursoAutoma-oTurma01
+# cursoAutomacaoTurma01
