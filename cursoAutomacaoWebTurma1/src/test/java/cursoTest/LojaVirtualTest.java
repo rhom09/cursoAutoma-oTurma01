@@ -3,6 +3,7 @@ package cursoTest;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -16,16 +17,38 @@ public class LojaVirtualTest extends BaseTest {
 
 		WebElement pesquisa = driver.findElement(By.id("search"));
 		pesquisa.sendKeys("Fortaleza Digital", Keys.ENTER);
-		
+
 		WebElement elTituloLivro = driver.findElement(By.cssSelector("h2.product-name"));
 		String livro = elTituloLivro.getText();
-		
+
 		WebElement elPreco = driver.findElement(By.cssSelector("span.regular-price span.price"));
 		String preco = elPreco.getText();
-		
+
 		assertThat(livro, is("[PRODUTO DE EXEMPLO] - Fortaleza Digital"));
 		assertThat(preco, is("R$519,90"));
-		
+
+	}
+
+	@Test
+	public void testClickLista() {
+
+		WebElement pesquisa = driver.findElement(By.id("search"));
+		pesquisa.sendKeys("html", Keys.ENTER);
+
+		List<WebElement> elLivros = driver.findElements(By.cssSelector("ul.products-grid > li"));
+
+		for (WebElement elLivro : elLivros) {
+			WebElement elTituloLivro = elLivro.findElement(By.cssSelector("h2 > a"));
+
+			String tituloLivro = elTituloLivro.getText();
+			if (tituloLivro.contains("Ajax com Java")) {
+				WebElement elPreco = elLivro.findElement(By.cssSelector("span.price"));
+
+				assertThat(elPreco.getText(), is("R$444,50"));
+				break;
+			}
+		}
+
 	}
 
 }
