@@ -1,41 +1,31 @@
 package cursoTest;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+
+
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-public class LojaVirtualTest {
-
-	WebDriver driver;
+public class LojaVirtualTest extends BaseTest {
 
 	@Test
-	public void abreFechaNavegador() {
-		abreNavegador();
-		fechaNavegador();
-	}
-	
-	@Test
-	public void pesquisaLivro() {
-		abreNavegador();
-		
+	public void testPesquisaLivro() {
+
 		WebElement pesquisa = driver.findElement(By.id("search"));
 		pesquisa.sendKeys("Fortaleza Digital", Keys.ENTER);
 		
-		fechaNavegador();
-	}
-
-	public void abreNavegador() {
-		// System.setProperty("webdriver.chrome.driver", "/bin/chromedriver");
-		driver = new ChromeDriver();
-		driver.get("https://lojaexemplod.lojablindada.com/");
-		driver.manage().window().maximize();
-	}
-
-	public void fechaNavegador() {
-		driver.quit();
+		WebElement elTituloLivro = driver.findElement(By.cssSelector("h2.product-name"));
+		String livro = elTituloLivro.getText();
+		
+		WebElement elPreco = driver.findElement(By.cssSelector("span.regular-price span.price"));
+		String preco = elPreco.getText();
+		
+		assertThat(livro, is("[PRODUTO DE EXEMPLO] - Fortaleza Digital"));
+		assertThat(preco, is("R$519,90"));
+		
 	}
 
 }
