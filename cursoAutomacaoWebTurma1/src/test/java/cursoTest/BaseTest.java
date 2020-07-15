@@ -2,24 +2,19 @@ package cursoTest;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
+import core.Driver;
 
 public class BaseTest {
-	
-	WebDriver driver;
-	
+
 	@BeforeEach
 	public void abreNavegador() {
-		// System.setProperty("webdriver.chrome.driver", "/bin/chromedriver");
-		driver = new ChromeDriver();
-		driver.get("https://lojaexemplod.lojablindada.com/");
-		driver.manage().window().maximize();
+		Driver.abreNavegador("https://lojaexemplod.lojablindada.com/");
 	}
-	
+
 	@AfterEach
 	public void fechaNavegador() {
-		driver.quit();
+		Driver.fechaNavegador();
 	}
 
 }
