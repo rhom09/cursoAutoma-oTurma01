@@ -1,7 +1,10 @@
 package core;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import enums.ByValue;
 
@@ -9,6 +12,11 @@ public class Element {
 
 	ByValue by;
 	String map;
+	WebElement webElement = null;
+
+	public void setWebElement(WebElement element) {
+		this.webElement = element;
+	}
 
 	public Element(ByValue by, String map) {
 		this.by = by;
@@ -19,23 +27,23 @@ public class Element {
 		WebElement element = null;
 		switch (by) {
 		case ID:
-			element = Driver.getDriver().findElement(By.id(map));
+			element = get(By.id(map));
 			break;
 
 		case CSSSELECTOR:
-			element = Driver.getDriver().findElement(By.cssSelector(map));
+			element = get(By.cssSelector(map));
 			break;
 
 		case XPATH:
-			element = Driver.getDriver().findElement(By.xpath(map));
+			element = get(By.xpath(map));
 			break;
 
 		case CLASSNAME:
-			element = Driver.getDriver().findElement(By.className(map));
+			element = get(By.className(map));
 			break;
 
 		case NAME:
-			element = Driver.getDriver().findElement(By.name(map));
+			element = get(By.name(map));
 			break;
 
 		default:
@@ -43,17 +51,79 @@ public class Element {
 		}
 		return element;
 	}
-	
+
+	public WebElement get(By by) {
+		if (webElement == null) {
+			return Driver.getDriver().findElement(by);
+		} else {
+			return webElement.findElement(by);
+		}
+	}
+
+	public List<WebElement> getElements() {
+		List<WebElement> elements = null;
+		switch (by) {
+		case ID:
+			elements = Driver.getDriver().findElements(By.id(map));
+			break;
+
+		case CSSSELECTOR:
+			elements = Driver.getDriver().findElements(By.cssSelector(map));
+			break;
+
+		case XPATH:
+			elements = Driver.getDriver().findElements(By.xpath(map));
+			break;
+
+		case CLASSNAME:
+			elements = Driver.getDriver().findElements(By.className(map));
+			break;
+
+		case NAME:
+			elements = Driver.getDriver().findElements(By.name(map));
+			break;
+
+		default:
+			break;
+		}
+		return elements;
+	}
+
 	public void sendKeys(CharSequence... value) {
 		getElement().sendKeys(value);
 	}
-	
+
 	public String getText() {
 		return getElement().getText();
 	}
-	
+
 	public void click() {
 		getElement().click();
+	}
+
+	public String getAttribute(String value) {
+		return getElement().getAttribute(value);
+	}
+
+	public void clear() {
+		getElement().clear();
+	}
+
+	public boolean isEnabled() {
+		return getElement().isEnabled();
+	}
+
+	public boolean isDisplayed() {
+		return getElement().isDisplayed();
+	}
+
+	public boolean isSelected() {
+		return getElement().isSelected();
+	}
+
+	public void select(String value) {
+		Select select = new Select(getElement());
+		select.selectByVisibleText(value);
 	}
 
 }

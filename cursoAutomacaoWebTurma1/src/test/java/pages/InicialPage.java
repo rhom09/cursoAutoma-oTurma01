@@ -2,14 +2,12 @@ package pages;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import core.Driver;
 import map.InicialMap;
 
 public class InicialPage {
-	
+
 	InicialMap inicialMap = new InicialMap();
 
 	String elLivros = "ul.products-grid > li";
@@ -30,16 +28,16 @@ public class InicialPage {
 	}
 
 	public String getPrecoLista() {
-		List<WebElement> livros = Driver.getDriver().findElements(By.cssSelector(elLivros));
+		List<WebElement> livros = inicialMap.livros.getElements();
 
 		for (WebElement elLivro : livros) {
-			WebElement elTituloLivro = elLivro.findElement(By.cssSelector(elTituloLivroLista));
+			inicialMap.tituloLivroLista.setWebElement(elLivro);
+			String tituloLivro = inicialMap.tituloLivroLista.getText();
 
-			String tituloLivro = elTituloLivro.getText();
 			if (tituloLivro.contains("Ajax com Java")) {
-				WebElement elPreco = elLivro.findElement(By.cssSelector(elPrecoLista));
+				inicialMap.precoLista.setWebElement(elLivro);
 
-				return elPreco.getText();
+				return inicialMap.precoLista.getText();
 			}
 		}
 		return null;
