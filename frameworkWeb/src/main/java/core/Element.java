@@ -14,7 +14,7 @@ public class Element {
 	private ByValue by;
 	private String map;
 	private WebElement webElement = null;
-	private HashMap<ByValue, By> byMap = new HashMap<>();
+	private HashMap<ByValue, By> byMap = new HashMap<ByValue, By>();
 
 	public Element(ByValue by, String map) {
 		this.by = by;
