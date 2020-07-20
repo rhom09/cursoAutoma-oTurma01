@@ -7,10 +7,9 @@ public class Driver {
 
 	private static WebDriver driver;
 
-	public static void abreNavegador(String url) {
+	public static void abreNavegador() {
 		// System.setProperty("webdriver.chrome.driver", "/bin/chromedriver");
 		driver = new ChromeDriver();
-		driver.get(url);
 		driver.manage().window().maximize();
 	}
 

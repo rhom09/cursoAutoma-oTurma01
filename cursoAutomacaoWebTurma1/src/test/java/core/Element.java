@@ -1,5 +1,6 @@
 package core;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -10,83 +11,44 @@ import enums.ByValue;
 
 public class Element {
 
-	ByValue by;
-	String map;
-	WebElement webElement = null;
+	private ByValue by;
+	private String map;
+	private WebElement webElement = null;
+	private HashMap<ByValue, By> byMap = new HashMap<>();
+
+	public Element(ByValue by, String map) {
+		this.by = by;
+		this.map = map;
+		setByMap();
+	}
+
+	private void setByMap() {
+		byMap.put(ByValue.ID, By.id(map));
+		byMap.put(ByValue.CSSSELECTOR, By.cssSelector(map));
+		byMap.put(ByValue.XPATH, By.xpath(map));
+		byMap.put(ByValue.CLASSNAME, By.className(map));
+		byMap.put(ByValue.NAME, By.name(map));
+	}
 
 	public void setWebElement(WebElement element) {
 		this.webElement = element;
 	}
 
-	public Element(ByValue by, String map) {
-		this.by = by;
-		this.map = map;
-	}
-
 	public WebElement getElement() {
-		WebElement element = null;
-		switch (by) {
-		case ID:
-			element = get(By.id(map));
-			break;
+		return get(byMap.get(by));
 
-		case CSSSELECTOR:
-			element = get(By.cssSelector(map));
-			break;
-
-		case XPATH:
-			element = get(By.xpath(map));
-			break;
-
-		case CLASSNAME:
-			element = get(By.className(map));
-			break;
-
-		case NAME:
-			element = get(By.name(map));
-			break;
-
-		default:
-			break;
-		}
-		return element;
 	}
 
 	public WebElement get(By by) {
 		if (webElement == null) {
 			return Driver.getDriver().findElement(by);
-		} else {
-			return webElement.findElement(by);
 		}
+		return webElement.findElement(by);
 	}
 
 	public List<WebElement> getElements() {
-		List<WebElement> elements = null;
-		switch (by) {
-		case ID:
-			elements = Driver.getDriver().findElements(By.id(map));
-			break;
+		return Driver.getDriver().findElements(byMap.get(by));
 
-		case CSSSELECTOR:
-			elements = Driver.getDriver().findElements(By.cssSelector(map));
-			break;
-
-		case XPATH:
-			elements = Driver.getDriver().findElements(By.xpath(map));
-			break;
-
-		case CLASSNAME:
-			elements = Driver.getDriver().findElements(By.className(map));
-			break;
-
-		case NAME:
-			elements = Driver.getDriver().findElements(By.name(map));
-			break;
-
-		default:
-			break;
-		}
-		return elements;
 	}
 
 	public void sendKeys(CharSequence... value) {

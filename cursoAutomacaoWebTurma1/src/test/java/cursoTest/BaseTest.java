@@ -9,7 +9,7 @@ public class BaseTest {
 
 	@BeforeEach
 	public void abreNavegador() {
-		Driver.abreNavegador("https://lojaexemplod.lojablindada.com/");
+		Driver.abreNavegador();
 	}
 
 	@AfterEach

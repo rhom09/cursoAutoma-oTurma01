@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.is;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 
+import core.Driver;
 import pages.InicialPage;
 
 public class LojaVirtualTest extends BaseTest {
@@ -14,7 +15,8 @@ public class LojaVirtualTest extends BaseTest {
 
 	@Test
 	public void testPesquisaLivro() {
-
+		
+		Driver.setUrl("https://lojaexemplod.lojablindada.com/");
 		inicialPage.setPesquisa("fortaleza digital", Keys.ENTER);
 		String livro = inicialPage.getTituloLivro();
 
@@ -28,6 +30,7 @@ public class LojaVirtualTest extends BaseTest {
 	@Test
 	public void testClickLista() {
 
+		Driver.setUrl("https://lojaexemplod.lojablindada.com/");
 		inicialPage.setPesquisa("html", Keys.ENTER);
 
 		String preco = inicialPage.getPrecoLista();
