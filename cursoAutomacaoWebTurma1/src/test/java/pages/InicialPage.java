@@ -10,10 +10,6 @@ public class InicialPage {
 
 	InicialMap inicialMap = new InicialMap();
 
-	String elLivros = "ul.products-grid > li";
-	String elTituloLivroLista = "h2 > a";
-	String elPrecoLista = "span.price";
-
 	public void setPesquisa(CharSequence... valor) {
 		inicialMap.pesquisa.sendKeys(valor);
 	}
