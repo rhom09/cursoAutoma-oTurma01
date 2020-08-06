@@ -71,8 +71,9 @@ public class Element {
 		return getElement().getAttribute(value);
 	}
 
-	public void clear() {
+	public Element clear() {
 		getElement().clear();
+		return this;
 	}
 
 	public boolean isEnabled() {
@@ -107,16 +108,18 @@ public class Element {
 		}
 	}
 	
-	public void waitVisibleElement() {
+	public Element waitVisibleElement() {
 		element = Driver.waitVisibleElement(byMap.get(by));
+		return this;
 	}
 	
 	public void waitInvisibilityElement() {
 		Driver.waitInvisibilityElement(byMap.get(by));
 	}
 	
-	public void waitClickableElement() {
+	public Element waitClickableElement() {
 		element = Driver.waitClickableElement(byMap.get(by));
+		return this;
 	}
 	
 	

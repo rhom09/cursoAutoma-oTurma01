@@ -1,11 +1,19 @@
 package steps;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+
+import org.openqa.selenium.Keys;
+
 import core.Driver;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Entao;
 import io.cucumber.java.pt.Quando;
+import pages.InicialPage;
 
 public class InicialSteps {
+	
+	InicialPage inicialPage = new InicialPage();
 
 	@Dado("que estou na pagina loja virtual")
 	public void queEstouNaPaginaLojaVirtual() {
@@ -14,26 +22,18 @@ public class InicialSteps {
 
 	@Quando("realizo a busca do livro {string}")
 	public void realizoABuscaDoLivro(String titulo) {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+		inicialPage.setPesquisa(titulo, Keys.ENTER);
 	}
 
 	@Entao("valido o titulo sendo {string} e o preco sendo {string}")
 	public void validoOTituloSendoEOPrecoSendo(String titulo, String preco) {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+		assertThat(titulo, is(inicialPage.getTituloLivro()));
+		assertThat(preco, is(inicialPage.getPreco()));
 	}
 
 	@Quando("clico no livro pesquisado")
 	public void clicoNoLivroPesquisado() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
-	}
-
-	@Entao("confirmo o titulo sendo {string} e o preco sendo {string}")
-	public void confirmoOTituloSendoEOPrecoSendo(String titulo, String preco) {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+		inicialPage.clickTitulo();
 	}
 
 }
