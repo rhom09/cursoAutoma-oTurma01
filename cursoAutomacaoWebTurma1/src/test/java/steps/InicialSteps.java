@@ -1,18 +1,11 @@
 package steps;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
 import core.Driver;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Entao;
 import io.cucumber.java.pt.Quando;
 
 public class InicialSteps {
-
-	private static WebDriver driver;
 
 	@Dado("que estou na pagina loja virtual")
 	public void queEstouNaPaginaLojaVirtual() {
@@ -41,17 +34,6 @@ public class InicialSteps {
 	public void confirmoOTituloSendoEOPrecoSendo(String titulo, String preco) {
 		// Write code here that turns the phrase above into concrete actions
 		throw new io.cucumber.java.PendingException();
-	}
-
-	@Before
-	public void abreNavegador() {
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-	}
-
-	@After
-	public void fechaNavegador() {
-		driver.quit();
 	}
 
 }

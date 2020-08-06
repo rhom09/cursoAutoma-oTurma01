@@ -16,7 +16,7 @@ public class LojaVirtualTest extends BaseTest {
 	@Test
 	public void testPesquisaLivro() {
 		
-		Driver.setUrl("https://lojaexemplod.lojablindada.com/");
+		Driver.setUrl("http://www.lojaexemplodelivros.com.br/");
 		inicialPage.setPesquisa("fortaleza digital", Keys.ENTER);
 		String livro = inicialPage.getTituloLivro();
 
